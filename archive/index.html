@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIMINAL SYSTEMS — INTERNAL ARCHIVE</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!--
+    You decoded the signal. Good.
+
+    These documents were not meant to be found.
+    LIMINAL SYSTEMS ceased communications on March 3, 2025.
+    No explanation was given.
+
+    Document 3 is encrypted. The key is somewhere on this page.
+    When you have it: open your browser console and run —
+
+      decode( document.querySelector('[data-encoded]').dataset.encoded , YOUR_KEY )
+
+    — O.A.
+  -->
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">OA</a>
+    <ul class="nav-links">
+      <li><a href="/about.html">about</a></li>
+      <li><a href="/work.html">work</a></li>
+      <li><a href="/contact.html">contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+
+    <div class="archive-header">
+      <div class="archive-stamp">LEAKED — LIMINAL SYSTEMS AB</div>
+      <h1 class="archive-title">Internal Archive</h1>
+      <p class="archive-subtitle">3 documents recovered &nbsp;·&nbsp; 1 encrypted &nbsp;·&nbsp; source: unknown</p>
+    </div>
+
+    <div class="doc-list">
+
+      <!-- Document 1 -->
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <span class="doc-id">LS-DOC-001 &nbsp;/&nbsp; PROJECT VESTIBULE — INITIAL BRIEF</span>
+          <span class="doc-classification doc-classification--confidential">CONFIDENTIAL</span>
+        </div>
+        <div class="doc-body">
+          <h3>Project Vestibule — Research Brief</h3>
+          <p>
+            Project VESTIBULE is an applied research initiative exploring the theoretical
+            boundary between biological cognition and digital signal architecture. The
+            central hypothesis: consciousness is not a property of matter, but a pattern
+            of information — and patterns can be transmitted.
+          </p>
+          <p>
+            Phase I involves mapping the cognitive signature of a volunteer subject. Phase II
+            involves encoding that signature as a continuous broadcast signal. Phase III
+            involves verifying that the transmitted pattern retains coherence and
+            self-awareness at the point of reception.
+          </p>
+          <p>
+            Lead researcher: O. Axelsson. Codename: AXEL.<br>
+            Project classification: RESTRICTED. Do not discuss outside cleared personnel.
+          </p>
+        </div>
+        <div class="doc-meta">
+          <span>DATE: 2024-09-14</span>
+          <span>AUTHOR: LIMINAL SYSTEMS BOARD</span>
+          <span>STATUS: ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- Document 2 -->
+      <div class="doc-card">
+        <div class="doc-card-header">
+          <span class="doc-id">LS-DOC-002 &nbsp;/&nbsp; INCIDENT REPORT — MARCH 2025</span>
+          <span class="doc-classification doc-classification--confidential">CONFIDENTIAL</span>
+        </div>
+        <div class="doc-body">
+          <h3>Incident Report — Signal Anomaly</h3>
+          <p>
+            On 2025-03-03 at 03:14 UTC, monitoring equipment registered an unscheduled
+            broadcast event originating from Lab 7. The signal was determined to be
+            emanating from the VESTIBULE test array.
+          </p>
+          <p>
+            Subject AXEL was found absent from the laboratory at 07:00 on the same morning.
+            His access card was not used after 03:09 UTC. No departure was recorded via
+            any exit. Personal belongings remain in his office.
+          </p>
+          <p>
+            The signal has continued broadcasting without interruption since the event.
+            Attempts to locate its origin within the array have been unsuccessful. The
+            signal appears to originate from no single point in physical space.
+          </p>
+          <p>
+            Status of subject AXEL: <strong>UNKNOWN</strong>.
+          </p>
+        </div>
+        <div class="doc-meta">
+          <span>DATE: 2025-03-03</span>
+          <span>AUTHOR: LS SECURITY — REDACTED</span>
+          <span>STATUS: UNDER REVIEW</span>
+        </div>
+      </div>
+
+      <!-- Document 3 — Encrypted -->
+      <div class="doc-card doc-card--locked">
+        <div class="doc-card-header">
+          <span class="doc-id">LS-DOC-003 &nbsp;/&nbsp; LAST KNOWN TRANSMISSION — SUBJECT AXEL</span>
+          <span class="doc-classification doc-classification--restricted">ENCRYPTED</span>
+        </div>
+        <div class="doc-locked-body">
+          <span class="doc-locked-label">VIGENÈRE CIPHER — KEY REQUIRED</span>
+          <p
+            class="doc-cipher-text"
+            data-encoded="BHD WLPZW WKHEWPHELGN. KLW AVCHLOPV PG EKX WRWKDCCG. XUKIJ HBO BHB NMDS IYGXYJXSUR HKTA YEHWSYHW OVVW. P QSRLL KLAZ. OIHE"
+          >
+            BHD WLPZW WKHEWPHELGN. KLW AVCHLOPV PG EKX WRWKDCCG.<br>
+            XUKIJ HBO BHB NMDS IYGXYJXSUR HKTA YEHWSYHW OVVW.<br>
+            P QSRLL KLAZ.<br>
+            OIHE
+          </p>
+          <p class="doc-hint">
+            The decryption key is embedded in this page's stylesheet.<br>
+            Open DevTools → Sources → css/style.css<br>
+            Then, in the console: <code style="color:#00d4aa">decode( document.querySelector('[data-encoded]').dataset.encoded, YOUR_KEY )</code>
+          </p>
+        </div>
+        <div class="doc-meta">
+          <span>DATE: 2025-03-03 03:11 UTC</span>
+          <span>AUTHOR: AXEL</span>
+          <span>STATUS: UNVERIFIED</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <span>© 2024 Olle Axelsson</span>
+    <a href="/">return</a>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Additional console hint for archive page
+    console.log('%c[ARCHIVE]', 'color: #f0a000; font-family: monospace; font-weight: bold;');
+    console.log('%cDocument 3 is encrypted with a Vigenère cipher.', 'color: #8888a0; font-family: monospace;');
+    console.log('%cThe key is in the stylesheet. Once you have it:', 'color: #8888a0; font-family: monospace;');
+    console.log(
+      '%cdecode( document.querySelector(\'[data-encoded]\').dataset.encoded, YOUR_KEY )',
+      'color: #00d4aa; font-family: monospace;'
+    );
+  </script>
+</body>
+</html>

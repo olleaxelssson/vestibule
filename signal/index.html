@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGNAL-00 — ORIGIN UNKNOWN</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <!--
+    Good. You followed the signal.
+    Now read it.
+
+    The pattern repeats every 23 seconds.
+    MORSE: .- .-. -.-. .... .. ...- .
+
+    What does it say?
+    Where does it lead?
+  -->
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">OA</a>
+    <ul class="nav-links">
+      <li><a href="/about.html">about</a></li>
+      <li><a href="/work.html">work</a></li>
+      <li><a href="/contact.html">contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="signal-page">
+
+    <div class="signal-header">
+      LIMINAL SYSTEMS — SIGNAL INTERCEPT &nbsp;/&nbsp;
+      ID: <span>SIGNAL-00</span> &nbsp;/&nbsp;
+      STATUS: <span>ACTIVE</span>
+    </div>
+
+    <div class="signal-canvas-wrap">
+      <canvas id="signalCanvas" height="160"></canvas>
+    </div>
+
+    <div class="signal-readout">
+      <div><span class="label">ORIGIN</span><span class="value">UNKNOWN</span></div>
+      <div><span class="label">FREQUENCY</span><span class="value">3.14159 Hz</span></div>
+      <div><span class="label">FIRST DETECTED</span><span class="value">2025-03-03 03:14:15 UTC</span></div>
+      <div><span class="label">PATTERN</span><span class="morse">.- .-. -.-. .... .. ...- .</span></div>
+    </div>
+
+    <p class="signal-note">
+      The signal has been broadcasting continuously since detection. Its source cannot be located.
+      Its content repeats on a 23-second cycle. The pattern above is a faithful reproduction
+      of the raw transmission.
+    </p>
+
+    <div class="signal-hex">
+      RAW HEX DUMP &nbsp;→&nbsp; <span>617263686976652f</span>
+    </div>
+
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // ── Waveform renderer ──────────────────────────────────────────────
+    // The waveform encodes morse for ARCHIVE: .- .-. -.-. .... .. ...- .
+    // Dots = short peak, Dashes = tall peak, Gaps = flat
+
+    const canvas  = document.getElementById('signalCanvas');
+    const ctx     = canvas.getContext('2d');
+
+    // Morse sequence as amplitude multipliers: 0 = gap, 0.35 = dot, 1 = dash
+    const MORSE_SEQ = [
+      // A .-
+      0.35, 0, 1, 0,
+      // gap between letters
+      0, 0,
+      // R .-.
+      0.35, 0, 1, 0, 0.35, 0,
+      // gap
+      0, 0,
+      // C -.-.
+      1, 0, 0.35, 0, 1, 0, 0.35, 0,
+      // gap
+      0, 0,
+      // H ....
+      0.35, 0, 0.35, 0, 0.35, 0, 0.35, 0,
+      // gap
+      0, 0,
+      // I ..
+      0.35, 0, 0.35, 0,
+      // gap
+      0, 0,
+      // V ...-
+      0.35, 0, 0.35, 0, 0.35, 0, 1, 0,
+      // gap
+      0, 0,
+      // E .
+      0.35, 0,
+      // long end gap
+      0, 0, 0, 0,
+    ];
+
+    let t = 0;
+    const CYCLE = MORSE_SEQ.length;
+
+    function resize() {
+      canvas.width  = canvas.parentElement.clientWidth;
+      canvas.height = 160;
+    }
+
+    function draw() {
+      resize();
+      const W = canvas.width;
+      const H = canvas.height;
+      const cx = H / 2;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Background grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+      ctx.lineWidth = 1;
+      for (let y = 0; y < H; y += 20) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // Centre line
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.beginPath(); ctx.moveTo(0, cx); ctx.lineTo(W, cx); ctx.stroke();
+
+      // Waveform
+      ctx.strokeStyle = '#00d4aa';
+      ctx.lineWidth   = 1.5;
+      ctx.shadowColor = '#00d4aa';
+      ctx.shadowBlur  = 6;
+      ctx.beginPath();
+
+      const STEP = W / 300;
+
+      for (let px = 0; px < W; px++) {
+        const progress  = (px / W);
+        const seqIndex  = Math.floor(((t * 0.5 + progress * CYCLE) % CYCLE));
+        const amplitude = MORSE_SEQ[seqIndex] * 55;
+        const noise     = (Math.random() - 0.5) * 3;
+        const sine      = Math.sin(px * 0.12 + t * 0.08) * amplitude + noise;
+
+        if (px === 0) ctx.moveTo(px, cx - sine);
+        else          ctx.lineTo(px, cx - sine);
+      }
+
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Scan line
+      const scanX = ((t * 1.2) % W);
+      ctx.strokeStyle = 'rgba(0, 212, 170, 0.15)';
+      ctx.lineWidth   = 1;
+      ctx.beginPath(); ctx.moveTo(scanX, 0); ctx.lineTo(scanX, H); ctx.stroke();
+
+      t += 0.5;
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+    window.addEventListener('resize', resize);
+  </script>
+</body>
+</html>

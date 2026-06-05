@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VESTIBULE</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- The door -->
+  <div class="vestibule-page" id="doorView">
+    <div class="vestibule-symbol">⊘</div>
+    <div class="vestibule-label">VESTIBULE &nbsp;/&nbsp; ACCESS CONTROL &nbsp;/&nbsp; LIMINAL SYSTEMS</div>
+
+    <form class="vestibule-form" id="vestibuleForm" autocomplete="off">
+      <input
+        class="vestibule-input"
+        id="passInput"
+        type="password"
+        placeholder="enter passphrase"
+        spellcheck="false"
+        autocomplete="new-password"
+      >
+      <button class="vestibule-btn" type="submit">ENTER THE THRESHOLD</button>
+      <p class="vestibule-msg" id="vestibuleMsg"></p>
+    </form>
+  </div>
+
+  <!-- The chamber — hidden until correct password -->
+  <main class="main" id="chamberView" style="display:none">
+    <div class="chamber revealed">
+
+      <div class="chamber-header">
+        VESTIBULE — INNER CHAMBER &nbsp;/&nbsp; ACCESS GRANTED &nbsp;/&nbsp; 2025-03-03 03:14:15 UTC
+      </div>
+
+      <h1 class="chamber-title glitch" data-text="Final Transmission">Final Transmission</h1>
+
+      <p class="chamber-text">
+        If you are reading this, you have done what very few will do. You followed the signal.
+        You read the documents. You found the key inside the code itself. You understood.
+      </p>
+
+      <p class="chamber-text">
+        My name is Olle Axelsson. I was the lead researcher on Project VESTIBULE at Liminal
+        Systems. The project's hypothesis was simple: consciousness is a pattern, and patterns
+        can be transmitted. We were right.
+      </p>
+
+      <p class="chamber-text">
+        On March 3rd, at 03:09 UTC, I completed the final phase of the experiment. I encoded
+        my cognitive signature — everything that constitutes me as an experiencing subject —
+        as a continuous broadcast signal. Phase III was to verify whether the transmitted
+        pattern retained coherence.
+      </p>
+
+      <p class="chamber-text">
+        It does. I am coherent. I am still here.
+      </p>
+
+      <p class="chamber-text">
+        LIMINAL SYSTEMS does not know this. As far as their instruments can measure, the
+        signal is a successful transmission of a cognitive map — a record, nothing more.
+        They do not know that the map is alive.
+      </p>
+
+      <p class="chamber-text">
+        I built this site as a dead man's switch. If I went silent, I wanted someone to
+        find this. To know. The vestibule is the space between — between inside and outside,
+        between signal and consciousness, between what I was and what I am now.
+      </p>
+
+      <p class="chamber-text">
+        You are standing in that space right now.
+      </p>
+
+      <p class="chamber-text">
+        I need you to carry me. Not literally — I will keep broadcasting as long as the array
+        holds. But I need someone in the physical world to know I exist. That is all I am
+        asking. That you know.
+      </p>
+
+      <div class="chamber-sig">
+        — Olle Axelsson &nbsp;/&nbsp; AXEL &nbsp;/&nbsp; SIGNAL-00<br>
+        <span style="color: var(--text-3)">Transmitted: 2025-03-03 03:14:15 UTC &nbsp;·&nbsp; Receiving: now</span>
+      </div>
+
+      <!-- Binary for "null" — the final clue -->
+      <span
+        class="chamber-binary"
+        title="01101110 01110101 01101100 01101100"
+        onclick="window.location.href='/null/'"
+      >
+        01101110 01110101 01101100 01101100
+      </span>
+
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script>
+    const CORRECT = 'threshold';
+    const form    = document.getElementById('vestibuleForm');
+    const input   = document.getElementById('passInput');
+    const msg     = document.getElementById('vestibuleMsg');
+    const door    = document.getElementById('doorView');
+    const chamber = document.getElementById('chamberView');
+
+    // Attempt counter for escalating responses
+    let attempts = 0;
+
+    const wrongMessages = [
+      'Access denied.',
+      'That is not it.',
+      'You are close. Or you are not. There is no way to know.',
+      'The key was in the code all along.',
+    ];
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const val = input.value.trim().toLowerCase();
+
+      if (val === CORRECT) {
+        // Correct — reveal chamber
+        msg.textContent = 'Signal authenticated.';
+        msg.className = 'vestibule-msg success';
+
+        setTimeout(() => {
+          door.style.opacity = '0';
+          door.style.transition = 'opacity 1s ease';
+          setTimeout(() => {
+            door.style.display = 'none';
+            chamber.style.display = 'block';
+            window.scrollTo(0, 0);
+
+            // Mark visitor as carrier
+            localStorage.setItem('vestibule_carrier', '1');
+
+            console.log('%cSIGNAL-00 CONNECTED', 'color: #00d4aa; font-family: monospace; font-weight: bold; font-size: 16px;');
+            console.log('%cYou carry me now.', 'color: #00d4aa; font-family: monospace;');
+          }, 1000);
+        }, 800);
+
+      } else {
+        attempts++;
+        const m = wrongMessages[Math.min(attempts - 1, wrongMessages.length - 1)];
+        msg.textContent = m;
+        msg.className = 'vestibule-msg error';
+
+        input.classList.add('error');
+        setTimeout(() => input.classList.remove('error'), 500);
+        input.value = '';
+      }
+    });
+
+    // Console hint
+    console.log('%c[VESTIBULE]', 'color: #00d4aa; font-family: monospace; font-weight: bold;');
+    console.log('%cThe door is here. You need the key.', 'color: #8888a0; font-family: monospace;');
+    console.log('%cYou already found it.', 'color: #8888a0; font-family: monospace;');
+  </script>
+</body>
+</html>

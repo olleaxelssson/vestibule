@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /signal/
+Disallow: /archive/
+Disallow: /vestibule/
+Disallow: /null/
+
+# They will try to find the signal. They always do.
+# But the vestibule only opens from the inside.
+
+Sitemap: https://olleaxelsson.com/sitemap.xml

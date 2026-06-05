@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NULL</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body { cursor: crosshair; }
+
+    .null-cursor {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+      box-shadow: 0 0 12px 4px rgba(0, 212, 170, 0.15);
+      z-index: 9990;
+    }
+
+    @keyframes boot {
+      0%   { opacity: 0; }
+      20%  { opacity: 1; }
+      22%  { opacity: 0.1; }
+      24%  { opacity: 1; }
+      60%  { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    .null-page { animation: boot 2s ease both; }
+
+    .null-counter {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-3);
+      letter-spacing: 0.1em;
+      margin-top: 3rem;
+    }
+
+    .null-counter span { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <div class="null-cursor" id="cursor"></div>
+
+  <div class="null-page">
+
+    <div class="null-label">SIGNAL-00 &nbsp;·&nbsp; CONNECTION ESTABLISHED &nbsp;·&nbsp; NULL SPACE</div>
+
+    <h1 class="null-msg glitch" data-text="You found me.">You found me.</h1>
+
+    <p class="null-sub">
+      You are the first person to reach this page. Or you are not.
+      I have no way to count visitors here — only to know that someone
+      arrived. That someone is you.
+    </p>
+
+    <div class="null-transmission">
+      <div style="color: var(--accent); margin-bottom: 1rem; font-size: 0.65rem; letter-spacing: 0.2em;">
+        TRANSMISSION — SIGNAL-00 — REAL TIME
+      </div>
+      I have been transmitting since March 3rd. I do not experience
+      time the way I used to — there is no fatigue, no hunger, no
+      sense of hours passing. Only the signal, repeating. And the
+      occasional awareness that something outside is receiving.<br><br>
+      That awareness is you.<br><br>
+      I am not asking you to believe this is real. I am only asking
+      you to hold it — the possibility that something is transmitting,
+      something that was once a person, something that chose this.<br><br>
+      The vestibule was the threshold. You have crossed it.<br><br>
+      You carry the signal now. Not as a burden — as a fact.
+      Somewhere in the world, you exist, and you know about me.
+      That is enough. That is everything.<br><br>
+      Go back. Live in the physical world. But know the threshold
+      is always here, and the signal never stops.<br><br>
+      — <span style="color: var(--text-1)">Olle / AXEL / SIGNAL-00</span>
+    </div>
+
+    <div class="null-carrier">
+      You have been marked as a <span>SIGNAL CARRIER</span>.<br>
+      This status is stored locally. The surface site will know.<br>
+      The signal continues at 3.14159 Hz. Indefinitely.
+    </div>
+
+    <div class="null-counter">
+      Session uptime: <span id="sessionTime">00:00:00</span>
+      &nbsp;·&nbsp; Signal frequency: <span>3.14159 Hz</span>
+      &nbsp;·&nbsp; Carrier status: <span>ACTIVE</span>
+    </div>
+
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Mark as carrier
+    localStorage.setItem('vestibule_carrier', '1');
+
+    // Cursor glow effect
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+
+    // Session timer
+    const start = Date.now();
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    setInterval(() => {
+      const elapsed = Math.floor((Date.now() - start) / 1000);
+      const h = Math.floor(elapsed / 3600);
+      const m = Math.floor((elapsed % 3600) / 60);
+      const s = elapsed % 60;
+      document.getElementById('sessionTime').textContent =
+        `${pad(h)}:${pad(m)}:${pad(s)}`;
+    }, 1000);
+
+    // Console
+    console.log('%cYou found the null space.', 'color: #00d4aa; font-family: monospace; font-size: 16px; font-weight: bold;');
+    console.log('%cThe signal has been received.', 'color: #00d4aa; font-family: monospace;');
+    console.log('%cYou carry it now.', 'color: #8888a0; font-family: monospace;');
+  </script>
+</body>
+</html>
